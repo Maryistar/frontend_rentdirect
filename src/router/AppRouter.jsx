@@ -1,18 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Home from "../pages/Home";
-import PropertyDetail from "../pages/PropertyDetail";
-import Profile from "../pages/Profile";
-import MyApplications from "../pages/MyApplications";
-import MyProperties from "../pages/MyProperties";
-import CreateProperty from "../pages/CreateProperty";
+import Login from "../presentation/pages/Login";
+import Register from "../presentation/pages/Register";
+import Home from "../presentation/pages/Home";
+import PropertyDetail from "../presentation/pages/PropertyDetail";
+import Profile from "../presentation/pages/Profile";
+import MyApplications from "../presentation/pages/MyApplications";
+import MyProperties from "../presentation/pages/MyProperties";
+import CreateProperty from "../presentation/pages/CreateProperty";
+
+import ProtectedRoute from "../application/components/ProtectedRoute";
 
 export default function AppRouter() {
-  const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
-
   return (
     <Routes>
       {/* =====================
@@ -29,9 +28,9 @@ export default function AppRouter() {
       <Route
         path="/applications"
         element={
-          token && user?.role === "tenant"
-            ? <MyApplications />
-            : <Navigate to="/login" />
+          <ProtectedRoute allowedRoles={["tenant"]}>
+            <MyApplications />
+          </ProtectedRoute>
         }
       />
 
@@ -41,18 +40,18 @@ export default function AppRouter() {
       <Route
         path="/my-properties"
         element={
-          token && user?.role === "owner"
-            ? <MyProperties />
-            : <Navigate to="/login" />
+          <ProtectedRoute allowedRoles={["owner"]}>
+            <MyProperties />
+          </ProtectedRoute>
         }
       />
 
       <Route
         path="/create-property"
         element={
-          token && user?.role === "owner"
-            ? <CreateProperty />
-            : <Navigate to="/login" />
+          <ProtectedRoute allowedRoles={["owner"]}>
+            <CreateProperty />
+          </ProtectedRoute>
         }
       />
 
@@ -61,7 +60,11 @@ export default function AppRouter() {
       ===================== */}
       <Route
         path="/profile"
-        element={token ? <Profile /> : <Navigate to="/login" />}
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
       />
 
       {/* =====================

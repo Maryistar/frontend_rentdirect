@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProperties } from "../api/properties";
+import { getProperties } from "../../infrastructure/api/properties";
 
 export default function Home() {
   const [properties, setProperties] = useState([]);
@@ -64,7 +64,7 @@ export default function Home() {
               {/* IMAGEN */}
               {property.thumbnail ? (
                 <img
-                  src={property.thumbnail}
+                  src={`http://localhost:4000/${property.thumbnail}`}
                   alt={property.title || "Propiedad"}
                   style={{
                     width: "100%",

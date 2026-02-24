@@ -1,6 +1,8 @@
 const BASE_URL = 'http://localhost:4000/api/v1';
 
-export async function apiRequest(endpoint, method = 'GET', body = null, token = null) {
+export async function apiRequest(endpoint, method = 'GET', body = null) {
+  const token = localStorage.getItem("token");
+
   const headers = {
     'Content-Type': 'application/json'
   };
@@ -16,6 +18,10 @@ export async function apiRequest(endpoint, method = 'GET', body = null, token = 
   });
 
   const data = await res.json();
-  if (!res.ok) throw data;
+
+  if (!res.ok) {
+    throw data;
+  }
+
   return data;
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createProperty } from "../api/properties";
+import { createProperty } from "../../infrastructure/api/properties";
 
 export default function CreateProperty() {
   const navigate = useNavigate();

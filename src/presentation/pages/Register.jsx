@@ -37,8 +37,8 @@ export default function Register() {
         return;
       }
 
-      alert("Registro exitoso 🎉 Ahora puedes iniciar sesión");
-      window.location.href = "/login";
+      alert("Registro exitoso 🎉 Revisa tu correo para verificar tu cuenta");
+      window.location.href = "/verify-email";
     } catch (err) {
       setError("Error de conexión con el servidor");
     } finally {
@@ -69,6 +69,17 @@ export default function Register() {
           required
           style={styles.input}
         />
+
+        <input
+          name="cedula"
+          type="cedula"
+          placeholder="Cedula unica"
+          value={form.cedula}
+          onChange={handleChange}
+          required
+          style={styles.input}
+        />
+
 
         <input
           name="password"

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getPropertyById } from "../api/properties";
-import { applyToProperty } from "../api/applications";
+import { getPropertyById } from "../../infrastructure/api/properties";
+import { applyToProperty } from "../../infrastructure/api/applications";
 
 export default function PropertyDetail() {
   const { id } = useParams();
